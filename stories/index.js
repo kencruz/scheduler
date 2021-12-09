@@ -149,40 +149,10 @@ storiesOf("Appointment", module)
   .add("Appointment", () => <Appointment />)
   .add("Appointment with Time", () => <Appointment time={"12pm"} />)
   .add("Header", () => <Header time={"10am"} />)
-  .add("Empty", () => <Empty onAdd={action("onAdd")} />);
-
-storiesOf("Show", module)
-  .addParameters({
-    backgrounds: [{ name: "white", value: "#fff", default: true }]
-  })
+  .add("Empty", () => <Empty onAdd={action("onAdd")} />)
   .add("Show", () => <Show student={"Lydia Miller-Jones"} interviewer={interviewers[0]} onEdit={action("onEdit")} onDelete={action("onDelete")} />)
-
-storiesOf("Confirm", module)
-  .addParameters({
-    backgrounds: [{ name: "white", value: "#fff", default: true }]
-  })
-  .add("Confirm", () => <Confirm message={"Delete the appointment"} onConfirm={action("onConfirm")} onCancel={action("onCancel")} />);
-
-storiesOf("Status", module)
-  .addParameters({
-    backgrounds: [{ name: "white", value: "#fff", default: true }]
-  })
-  .add("Status", () => <Status message={"Deleting"} />);
-
-storiesOf("Error", module)
-  .addParameters({
-    backgrounds: [{ name: "white", value: "#fff", default: true }]
-  })
-  .add("Error", () => <Error message={"Could not delete appointment."} onClose={action("onClose")} />);
-
-storiesOf("Create", module)
-  .addParameters({
-    backgrounds: [{ name: "white", value: "#fff", default: true }]
-  })
-  .add("Edit", () => <Form student={""} interviewers={interviewers} onCancel={action("onCancel")} onSave={action("onSave")} />);
-
-storiesOf("Edit", module)
-  .addParameters({
-    backgrounds: [{ name: "white", value: "#fff", default: true }]
-  })
+  .add("Confirm", () => <Confirm message={"Delete the appointment"} onConfirm={action("onConfirm")} onCancel={action("onCancel")} />)
+  .add("Status", () => <Status message={"Deleting"} />)
+  .add("Error", () => <Error message={"Could not delete appointment."} onClose={action("onClose")} />)
+  .add("Create", () => <Form student={""} interviewers={interviewers} onCancel={action("onCancel")} onSave={action("onSave")} />)
   .add("Edit", () => <Form student={"Ken Cruz"} interviewers={interviewers} interviewer={1} onCancel={action("onCancel")} onSave={action("onSave")} />);
