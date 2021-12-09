@@ -8,6 +8,6 @@ export default function Appointment(props) {
   return (
     <article className="appointment">
       <Header time={props.time} />
-      {props.time ? <Show onEdit={props.onEdit} onDelete={props.onDelete} /> : <Empty /> }</article>
+      {props.interview ? <Show onEdit={props.onEdit} onDelete={props.onDelete} {...props.interview} /> : <Empty /> }</article>
   );
 }
