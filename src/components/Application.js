@@ -40,6 +40,22 @@ export default function Application(props) {
       .catch((err) => console.log(err.message));
   };
 
+  const removeInterview = function (id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null,
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    return axios
+      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .then(() => setState({ ...state, appointments }))
+      .catch((err) => console.log(err.message));
+  };
+
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
 
@@ -48,9 +64,7 @@ export default function Application(props) {
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
-        interview={interview}
-        interviewers={interviewers}
-        bookInterview={bookInterview}
+        {...{ interview, interviewers, bookInterview, removeInterview }}
       />
     );
   });
