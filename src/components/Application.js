@@ -67,6 +67,8 @@ export default function Application(props) {
     );
   });
 
+  schedule.push(<Appointment key={"5pm"} time={"5pm"} />);
+
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),
