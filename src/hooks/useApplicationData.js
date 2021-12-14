@@ -26,7 +26,10 @@ export function useApplicationData() {
 
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, appointment)
-      .then(() => setState({ ...state, appointments }));
+      .then(() => {
+        setState((prev) => ({ ...prev, appointments }));
+        updateSpots(id);
+      });
   };
 
   const cancelInterview = function (id) {
@@ -41,7 +44,31 @@ export function useApplicationData() {
 
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
-      .then(() => setState({ ...state, appointments }));
+      .then(() => {
+        setState((prev) => ({ ...prev, appointments }));
+        updateSpots(id);
+      });
+  };
+
+  const updateSpots = function (id) {
+    setState((prev) => {
+      const days = [...prev.days];
+      // get the day that contains the appointment id
+      let day;
+      for (const d of days) {
+        if (d.appointments.includes(id)) {
+          day = d;
+          break;
+        }
+      }
+      if (day) {
+        // count the number of free appointment slots
+        day.spots = day.appointments.filter(
+          (appointment_id) => !prev.appointments[appointment_id].interview
+        ).length;
+      }
+      return { ...prev, days };
+    });
   };
 
   useEffect(() => {
