@@ -1,14 +1,24 @@
 # Interview Scheduler
 
-## Setup
+Interview Scheduler is a simple appointment booking system.
 
-Install dependencies with `npm install`.
+Built with React.
 
-## Running Webpack Development Server
+## Final Product
 
-```sh
-npm start
-```
+!["Screenshot of the main view"](https://github.com/kencruz/scheduler/blob/master/docs/main-view.png)
+
+!["Screenshot of editing an appointment"](https://github.com/kencruz/scheduler/blob/master/docs/appointment-form.png)
+
+!["Screenshot of confirming appointment cancellation"](https://github.com/kencruz/scheduler/blob/master/docs/confirm-delete.png)
+
+## Getting Started
+
+1. Clone this repository and enter the directory: `git clone https://github.com/kencruz/scheduler.git && cd scheduler`
+2. Install dependencies using the `npm install` command.
+3. Setup the backend server with the [scheduler-api repo](https://github.com/lighthouse-labs/scheduler-api). Follow its README to run the backend server.
+3. Start the web server using the `npm start` command. The app will be served at <http://localhost:8000/>.
+4. Go to <http://localhost:8000/> in your browser.
 
 ## Running Jest Test Framework
 
@@ -21,3 +31,9 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Dependencies
+
+- React
+- axios
+- Node v12.22.7
