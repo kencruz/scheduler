@@ -32,8 +32,19 @@ npm test
 npm run storybook
 ```
 
+## Running Cypress Testbed
+Make sure you have cypress installed globally
+```sh
+npm install -g cypress
+```
+Running cypress
+```sh
+npm run cypress
+```
+
 ## Dependencies
 
-- React
+- react v16.9.0
+- classnames
 - axios
 - Node v12.22.7
