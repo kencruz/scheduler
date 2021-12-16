@@ -10,6 +10,7 @@ import Confirm from "./Confirm";
 import Error from "./Error";
 
 export default function Appointment(props) {
+  // these are Appointment modes for the various stages of the appointment
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -20,6 +21,8 @@ export default function Appointment(props) {
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
 
+  // Use a custom hook to manage the Appointment's state.
+  // On first render, will show an interview if it exists
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -30,6 +33,7 @@ export default function Appointment(props) {
       interviewer,
     };
     transition(SAVING);
+    // call the bookInterview function to save to database
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
@@ -38,6 +42,7 @@ export default function Appointment(props) {
 
   const deleteHandler = function () {
     transition(DELETING, true);
+    // call the cancelInterview function to remove from database
     props
       .cancelInterview(props.id)
       .then(() => transition(EMPTY))

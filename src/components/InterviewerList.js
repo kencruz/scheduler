@@ -22,6 +22,7 @@ export default function InterviewerList(props) {
   );
 }
 
+// ensures that interviewer prop is an array
 InterviewerList.propTypes = {
   interviewers: PropTypes.array.isRequired,
 };

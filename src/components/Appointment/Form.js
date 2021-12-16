@@ -12,6 +12,7 @@ export default function Form(props) {
     setInterviewer("");
     setError("");
   };
+
   const cancel = () => {
     reset();
     props.onCancel();
@@ -22,6 +23,7 @@ export default function Form(props) {
       setError("Student name cannot be blank");
       return;
     }
+    // should clear any lingering error messages if input is valid
     setError("");
     props.onSave(student, interviewer);
   }
@@ -29,7 +31,13 @@ export default function Form(props) {
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
+        <form
+          autoComplete="off"
+          onSubmit={
+            (event) =>
+              event.preventDefault() /* stops browser submitting form when pressing enter  */
+          }
+        >
           <input
             className="appointment__create-input text--semi-bold"
             name="name"
@@ -52,7 +60,7 @@ export default function Form(props) {
           <Button danger onClick={cancel}>
             Cancel
           </Button>
-          <Button confirm onClick={() => validate()}>
+          <Button confirm onClick={validate}>
             Save
           </Button>
         </section>

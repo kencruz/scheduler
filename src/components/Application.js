@@ -8,6 +8,7 @@ import {
   getInterviewersForDay,
 } from "../helpers/selectors";
 
+// state management is handled through a custom hook
 import { useApplicationData } from "hooks/useApplicationData";
 
 export default function Application(props) {
@@ -18,17 +19,24 @@ export default function Application(props) {
 
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-
+    const [key, id, time] = [appointment.id, appointment.id, appointment.time];
     return (
       <Appointment
-        key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
-        {...{ interview, interviewers, bookInterview, cancelInterview }}
+        {...{
+          key,
+          id,
+          time,
+          interview,
+          interviewers,
+          bookInterview,
+          cancelInterview,
+        }}
       />
     );
   });
 
+  // We need this for the 4pm appointment to show because
+  // of CSS rule: .appointment:last-of-type, display: none;
   schedule.push(<Appointment key={"5pm"} time={"5pm"} />);
 
   return (

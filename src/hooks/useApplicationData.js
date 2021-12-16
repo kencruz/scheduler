@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export function useApplicationData() {
+  // Initial state values necessary for the app rendering to not crash
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -22,11 +23,10 @@ export function useApplicationData() {
       [id]: appointment,
     };
 
-    console.log(id, interview);
-
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, appointment)
       .then(() => {
+        // only if request is successful should we update the state
         setState((prev) => ({ ...prev, appointments }));
         updateSpots(id);
       });
@@ -45,6 +45,7 @@ export function useApplicationData() {
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
       .then(() => {
+        // only if request is successful should we update the state
         setState((prev) => ({ ...prev, appointments }));
         updateSpots(id);
       });
@@ -64,13 +65,15 @@ export function useApplicationData() {
       if (day) {
         // count the number of free appointment slots
         day.spots = day.appointments.filter(
-          (appointment_id) => !prev.appointments[appointment_id].interview
+          (id) => !prev.appointments[id].interview
         ).length;
       }
       return { ...prev, days };
     });
   };
 
+  // Once the app loads, fetch data from api and save to state.
+  // Only run one time per browser page load.
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),

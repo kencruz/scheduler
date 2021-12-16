@@ -1,45 +1,46 @@
 export function getAppointmentsForDay(state, day) {
-  const output = [];
+  const appointments = [];
   let dayTarget;
-  for (const dayObj of state.days) {
-    if (dayObj.name === day) {
-      dayTarget = dayObj;
+  for (const d of state.days) {
+    if (d.name === day) {
+      dayTarget = d;
+      break;
     }
   }
 
   if (dayTarget) {
-    for (const appointment of dayTarget.appointments) {
-      output.push(state.appointments[appointment]);
+    for (const id of dayTarget.appointments) {
+      appointments.push(state.appointments[id]);
     }
   }
-  return output;
+  return appointments;
 }
 
 export function getInterview(state, interview) {
-  let output = null;
   if (interview) {
     return {
       ...interview,
       interviewer: state.interviewers[interview.interviewer],
     };
   }
-  return output;
+  return null;
 }
 
 export function getInterviewersForDay(state, day) {
-  const output = [];
+  const interviewers = [];
   let dayTarget;
 
-  for (const dayObj of state.days) {
-    if (dayObj.name === day) {
-      dayTarget = dayObj;
+  for (const d of state.days) {
+    if (d.name === day) {
+      dayTarget = d;
+      break;
     }
   }
 
   if (dayTarget) {
-    for (const interviewer of dayTarget.interviewers) {
-      output.push(state.interviewers[interviewer]);
+    for (const id of dayTarget.interviewers) {
+      interviewers.push(state.interviewers[id]);
     }
   }
-  return output;
+  return interviewers;
 }
